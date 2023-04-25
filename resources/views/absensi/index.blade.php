@@ -6,8 +6,9 @@
   </x-slot>
 
   <div class="container mx-auto p-8 sm:pt-5 pt-10 w-full">
-    <div class="grid place-content-center">
-      <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white border-gray-800 text-gray-900 shadow-xl overflow-hidden sm:rounded-lg rounded-md border">
+    <div class="grid lg:grid-cols-2 justify-center">
+      <div class="md:col-span-1 md:flex justify-center">
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white border-gray-800 text-gray-900 shadow-xl overflow-hidden sm:rounded-lg rounded-md border">
         <form action="{{ route('absensi.store_user') }}" method="post">
           @csrf
           <div class="form-group mb-4">
@@ -32,28 +33,32 @@
           </div>
           </form>
         </div>
+      </div>
 
-      <div class="grid place-content-center py-4 px-4 w-full bg-white border border-gray-800 rounded-lg mt-8 shadow-xl">
-        <div class="text-center font-semibold py-4">Daftar Absensi</div>
-        <table class="table-striped grid place-content-center gap-4">
-            <thead class="border-b border-gray-800">
-                <tr class="">
-                    <th class="p-2">Tanggal</th>
-                    <th class="p-2">Status</th>
-                    <th class="p-2">Keterangan</th>
-                </tr>
-            </thead>
+      <div class="md:col-span-1 md:flex justify-center">
+        <div class="py-4 px-4 bg-white border border-gray-800 rounded-lg mt-8 shadow-xl w-full sm:max-w-md">
+        <div class="text-center font-semibold py-4 uppercase text-lg">Daftar Absensi</div>
+        <table class="table-striped gap-4 w-full">
+          <thead class="border-b border-gray-800">
+            <tr class="">
+              <th class="p-2">Tanggal</th>
+              <th class="p-2">Status</th>
+              <th class="p-2">Keterangan</th>
+            </tr>
+          </thead>
             <tbody>
                 @foreach($absensi as $absen)
                 <tr>
-                    <td class="p-2">{{ $absen->tanggal }}</td>
-                    <td class="p-2">{{ $absen->status }}</td>
-                    <td class="p-2">{{ $absen->keterangan }}</td>
+                    <td class="p-2 text-center">{{ $absen->tanggal }}</td>
+                    <td class="p-2 text-center">{{ $absen->status }}</td>
+                    <td class="p-2 text-center">{{ $absen->keterangan }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
       </div>
+      </div>
+
     </div>
   </div>
 </x-app-layout>
