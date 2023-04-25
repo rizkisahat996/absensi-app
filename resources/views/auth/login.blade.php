@@ -7,8 +7,10 @@
 
         <!-- Email Address -->
         <div>
+            <div class="text-lg text-center uppercase font-semibold">Login Form</div>
+            <div class="border-b border-2 border-gray-800 m-4"></div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="JohnDoe@gmail.com"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -19,7 +21,8 @@
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
-                            required autocomplete="current-password" />
+                            required autocomplete="current-password"
+                            placeholder="********"/>
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -42,6 +45,11 @@
             <x-primary-button class="ml-3">
                 {{ __('Log in') }}
             </x-primary-button>
+        </div>
+
+        <div class="flex items-center justify-center text-sm gap-1 m-4">
+          Don't Have an Account?
+          <a class="hover:text-gray-500 duration-300 font-semibold italic" href="{{ route('register') }}">Register Here!</a>
         </div>
     </form>
 </x-guest-layout>
