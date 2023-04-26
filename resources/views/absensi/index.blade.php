@@ -4,61 +4,46 @@
         {{ __('Absensi') }}
     </h2>
   </x-slot>
-
-  <div class="container mx-auto p-8 sm:pt-5 pt-10 w-full">
-    <div class="grid lg:grid-cols-2 justify-center">
-      <div class="md:col-span-1 md:flex justify-center">
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white border-gray-800 text-gray-900 shadow-xl overflow-hidden sm:rounded-lg rounded-md border">
-        <form action="{{ route('absensi.store_user') }}" method="post">
-          @csrf
-          <div class="form-group mb-4">
-            <label for="tanggal" class="block">Tanggal:</label>
-            <input type="date" name="tanggal" id="tanggal" class="w-full rounded border border-gray-800" required>
-          </div>
-          <div class="form-group mb-4">
-            <label for="status" class="block">Status:</label>
-            <select name="status" id="status" class="w-full rounded border border-gray-800" required>
-              <option value="hadir">Hadir</option>
-              <option value="izin">Izin</option>
-              <option value="telat">Telat</option>
-              <option value="absen">Absen</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="keterangan" class="block">Keterangan:</label>
-            <textarea name="keterangan" id="keterangan" class="w-full rounded border border-gray-800"></textarea>
-          </div>
-          <div class="py-4 grid place">
-            <button type="submit" class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300">Kirim</button>
-          </div>
-          </form>
-        </div>
-      </div>
-
-      <div class="md:col-span-1 md:flex justify-center">
-        <div class="py-4 px-4 bg-white border border-gray-800 rounded-lg mt-8 shadow-xl w-full sm:max-w-md">
-        <div class="text-center font-semibold py-4 uppercase text-lg">Daftar Absensi</div>
-        <table class="table-striped gap-4 w-full">
-          <thead class="border-b border-gray-800">
-            <tr class="">
-              <th class="p-2">Tanggal</th>
-              <th class="p-2">Status</th>
-              <th class="p-2">Keterangan</th>
+  <div class="md:col-span-1 md:flex justify-center">
+    <div class="py-4 px-4 bg-white border border-gray-800 rounded-lg mt-8 shadow-xl w-full sm:max-w-md">
+      <div class="text-center font-semibold py-4 uppercase text-lg">Daftar Absensi</div>
+      <table class="table-striped gap-4 w-full">
+        <thead class="border-b border-gray-800">
+          <tr class="">
+            <th class="p-2">Tanggal</th>
+            <th class="p-2">Status</th>
+            <th class="p-2">Keterangan</th>
+            <th class="p-2">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($absensi as $absen)
+          <form action="{{ route('absensi.update_user', $absen->id) }}" method="post">
+            @csrf
+            @method('PUT')
+            <tr>
+              <td class="p-2 text-center">{{ $absen->tanggal }}</td>
+              <td class="p-2 text-center">
+                <select name="status" id="status" class="rounded border border-gray-800" required @if(!empty($absen->status)) disabled @endif>
+                  <option value="hadir" @if($absen->status == 'hadir') selected disabled @endif>Hadir</option>
+                  <option value="izin" @if($absen->status == 'izin') selected disabled  @endif>Izin</option>
+                  <option value="telat" @if($absen->status == 'telat') selected disabled  @endif>Telat</option>
+                  <option value="absen" @if($absen->status == 'absen') selected disabled  @endif>Absen</option>
+                </select>
+              </td>
+              <td>{{ $absen->keterangan }}</td>
+              <td>
+                @if(empty($absen->status))
+                <div class="py-4 grid place">
+                  <button type="submit" class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300">Kirim</button>
+                </div>
+                @endif
+              </td>
             </tr>
-          </thead>
-            <tbody>
-                @foreach($absensi as $absen)
-                <tr>
-                    <td class="p-2 text-center">{{ $absen->tanggal }}</td>
-                    <td class="p-2 text-center">{{ $absen->status }}</td>
-                    <td class="p-2 text-center">{{ $absen->keterangan }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-      </div>
-      </div>
-
+          </form>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
 </x-app-layout>

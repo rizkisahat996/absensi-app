@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 // routes untuk user
 Route::middleware(['auth'])->group(function () {
     Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
-    Route::post('/absensi/store_user', [AbsensiController::class, 'store_user'])->name('absensi.store_user');
+    Route::patch('/absensi/{id}', [AbsensiController::class, 'update_user'])->name('absensi.update_user');
 });
 
 // routes untuk admin
@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/absensi/admin', [AbsensiController::class, 'index_admin'])->name('absensi.index_admin');
     Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store');
     Route::patch('/absensi/{id}', [AbsensiController::class, 'update'])->name('absensi.update');
+    Route::delete('/absensi/{id}', [AbsensiController::class, 'destroy'])->name('absensi.destroy');
 });
 
 

@@ -15,4 +15,9 @@ class Absen extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function absensi()
+    {
+        return $this->belongsTo(Absensi::class, 'absensi_id');
+    }
 }
