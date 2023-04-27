@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->foreignId('absensi_id');
             $table->enum('status', ['hadir', 'izin', 'telat', 'absen'])->nullable();
+            $table->date('tanggal_absen')->reference('tanggal')->on('kelas');
             $table->timestamps();
         });
     }

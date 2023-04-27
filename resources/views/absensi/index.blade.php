@@ -18,29 +18,26 @@
         </thead>
         <tbody>
           @foreach($absensi as $absen)
-          <form action="{{ route('absensi.update_user', $absen->id) }}" method="post">
-            @csrf
-            @method('PUT')
             <tr>
               <td class="p-2 text-center">{{ $absen->tanggal }}</td>
+              <td class="p-2 text-center">{{ $absen->keterangan }}</td>
               <td class="p-2 text-center">
-                <select name="status" id="status" class="rounded border border-gray-800" required @if(!empty($absen->status)) disabled @endif>
-                  <option value="hadir" @if($absen->status == 'hadir') selected disabled @endif>Hadir</option>
-                  <option value="izin" @if($absen->status == 'izin') selected disabled  @endif>Izin</option>
-                  <option value="telat" @if($absen->status == 'telat') selected disabled  @endif>Telat</option>
-                  <option value="absen" @if($absen->status == 'absen') selected disabled  @endif>Absen</option>
-                </select>
+                <form action="{{ route('absensi.update_user', $absen->id) }}" method="post">
+                  @csrf
+                  @method('PATCH')
+                  <select name="status" id="status" class="rounded border border-gray-800" required>
+                    <option value="hadir" {{ $absen->status == 'hadir' ? 'selected' : '' }}>Hadir</option>
+                    <option value="izin" {{ $absen->status == 'izin' ? 'selected' : '' }}>Izin</option>
+                    <option value="telat" {{ $absen->status == 'telat' ? 'selected' : '' }}>Telat</option>
+                  </select>
               </td>
-              <td>{{ $absen->keterangan }}</td>
               <td>
-                @if(empty($absen->status))
                 <div class="py-4 grid place">
-                  <button type="submit" class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300">Kirim</button>
+                  <button type="submit" class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300"  {{ $absen->status ? 'disabled' : '' }} >Kirim</button>
                 </div>
-                @endif
               </td>
+            </form>
             </tr>
-          </form>
           @endforeach
         </tbody>
       </table>

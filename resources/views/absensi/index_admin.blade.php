@@ -28,8 +28,10 @@
                                                 </div>
 								</div>
 								<div x-data="{ open: false }" class="grid py-4 border-gray-800 border-t border-b px-4 max-w-sm sm:max-w-full">
+									@foreach ($absensi as $absen)
 												<div class="grid grid-cols-2 py-2">
-																<div class="col-span-1 text-start">12/12/2012</div>
+																{{-- <div class="col-span-1 text-start">12/12/2012</div> --}}
+																<div class="col-span-1 text-start">{{ $absen->tanggal }}</div>
 																<div class="col-span-1 text-end">
 																				<a @click="open = !open" href="#"
 																								class="bg-green-500 py-2 px-4 text-white text-sm rounded hover:bg-green-600 duration-200">View</a>
@@ -38,13 +40,21 @@
 												<div class="cols-span-full grid grid-cols-12 w-full py-2" x-transition x-show="open">
 																<div class="col-start-1 col-end-4 font-semibold">User</div>
 																<div class="col-start-5 col-end-7 font-semibold">Status</div>
-																<div class="col-start-8 col-end-13 text-center font-semibold">Keterangan</div>
-																{{-- @foreach ($absensi as $absen)
-																				<div class="col-start-1 col-end-4">{{ $absen->user->name }}</div>
-																				<div class="col-start-5 col-end-7">{{ $absen->status }}</div>
-																				<div class="col-start-8 col-end-13 text-center">{{ $absen->keterangan }}</div>
-																@endforeach --}}
+																{{-- @if ($absensi) --}}
+																	{{-- @foreach ($absensi as $absen) --}}
+																		<div class="col-start-1 col-end-4">{{ $absen->user->name }}</div>
+																		@if ($absen->status !== null)
+																			<div class="col-start-5 col-end-7">{{ $absen->status }}</div>
+																		@else
+																			<div class="col-start-5 col-end-7">No Attendance Yet</div>
+																		@endif
+																	{{-- @endforeach --}}
+																{{-- @else
+																	
+																@endif --}}
+																	
 												</div>
+									@endforeach
 								</div>
 				</div>
 </x-app-layout>

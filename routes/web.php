@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 // routes untuk user
 Route::middleware(['auth'])->group(function () {
     Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
-    Route::patch('/absensi/{id}', [AbsensiController::class, 'update_user'])->name('absensi.update_user');
+    Route::patch('/absensis/{id}', [AbsensiController::class, 'update_user'])->name('absensi.update_user');
 });
 
 // routes untuk admin

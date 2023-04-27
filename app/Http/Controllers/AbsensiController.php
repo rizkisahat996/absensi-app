@@ -14,25 +14,23 @@ class AbsensiController extends Controller
         // Mendapatkan user ID dari user yang login
         $user_id = auth()->user()->id;
 
-        // Mendapatkan semua data absensi dari user
-        $absensi = Absensi::orderBy('tanggal', 'desc')->get();
+        $absensi = Absen::join('absensis', 'absensis.id', '=', 'absens.absensi_id')
+                        ->join('users', 'users.id', '=', 'absens.user_id')
+                        ->where('user_id', $user_id)
+                        ->get();
 
-        // Mendapatkan semua data absen user yang terkait dengan user ID
-        $absen = Absen::where('user_id', $user_id)->orderBy('id')->get();
-
-        return view('absensi.index', compact('absensi', 'absen'));
+        return view('absensi.index', compact('absensi'));
     }
 
 
     public function index_admin()
     {
         // Mendapatkan semua data absensi
-        $absensi = Absensi::orderBy('tanggal', 'desc')->get();
-
-        // Mendapatkan semua data user
-        $users = User::all();
-
-        return view('absensi.index_admin', compact('absensi', 'users'));
+        $absensi = Absen::join('absensis', 'absensis.id', '=', 'absens.absensi_id')
+                        ->join('users', 'users.id', '=', 'absens.user_id')
+                        ->get();
+                        
+        return view('absensi.index_admin', compact('absensi'));
     }
 
     public function store(Request $request)
@@ -51,6 +49,7 @@ class AbsensiController extends Controller
             $absen = new Absen;
             $absen->user_id = $user->id;
             $absen->absensi_id = $absensi->id;
+            $absen->tanggal_absen = $absensi->tanggal;
             $absen->save();
         }
 
