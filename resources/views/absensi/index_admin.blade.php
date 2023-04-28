@@ -31,12 +31,13 @@
 									@foreach ($absensi as $absen)
 												<div class="grid grid-cols-2 py-2">
 																{{-- <div class="col-span-1 text-start">12/12/2012</div> --}}
-																<div class="col-span-1 text-start">{{ $absen->tanggal }}</div>
+																<div class="col-span-1 text-start">{{ $absen->absensi->tanggal }}</div>
 																<div class="col-span-1 text-end">
 																				<a @click="open = !open" href="#"
 																								class="bg-green-500 py-2 px-4 text-white text-sm rounded hover:bg-green-600 duration-200">View</a>
 																</div>
 												</div>
+												{{ $absen->id }}
 												<div class="cols-span-full grid grid-cols-12 w-full py-2" x-transition x-show="open">
 																<div class="col-start-1 col-end-4 font-semibold">User</div>
 																<div class="col-start-5 col-end-7 font-semibold">Status</div>
@@ -44,7 +45,7 @@
 																	{{-- @foreach ($absensi as $absen) --}}
 																		<div class="col-start-1 col-end-4">{{ $absen->user->name }}</div>
 																		@if ($absen->status !== null)
-																		<form action="{{ route('absensi.update_user', $absen->absensi_id) }}" method="post">
+																		<form action="{{ route('absensi.update', $absen->id) }}" method="post">
 																			@csrf
 																			@method('PATCH')
 																			<select name="status" id="status" class="rounded border border-gray-800" required>

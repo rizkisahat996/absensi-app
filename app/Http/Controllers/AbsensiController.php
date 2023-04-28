@@ -28,9 +28,7 @@ class AbsensiController extends Controller
     public function index_admin()
     {
         // Mendapatkan semua data absensi
-        $absensi = Absen::join('absensis', 'absensis.id', '=', 'absens.absensi_id')
-                        ->join('users', 'users.id', '=', 'absens.user_id')
-                        ->get();
+        $absensi = Absen::get();
                         
         return view('absensi.index_admin', compact('absensi'));
     }
@@ -55,7 +53,7 @@ class AbsensiController extends Controller
             $absen->save();
         }
 
-        return redirect()->route('absensi.index_admin')->with('success', 'Absensi berhasil ditambahkan.');
+        return back()->with('success', 'Absensi berhasil ditambahkan.');
     }
 
     public function update_user(Request $request, $id)
@@ -72,24 +70,21 @@ class AbsensiController extends Controller
         // Menyimpan perubahan pada objek absen
         $absen->save();
 
-        return redirect()->route('absensi.index')->with('success', 'Absen berhasil diupdate.');
+        return back()->with('success', 'Absen berhasil diupdate.');
     }
-
-
 
     public function update(Request $request, $id)
     {
-        // Mendapatkan objek absen berdasarkan ID
+        // Mendapatkan objek absen berdasarkan ID dan user ID
         $absen = Absen::find($id);
 
-        // Memperbarui status dan keterangan pada objek absen
+        // Memperbarui status pada objek absen
         $absen->status = $request->status;
-        // dd($absen);
 
         // Menyimpan perubahan pada objek absen
         $absen->save();
 
-        return redirect()->route('absensi.index_admin')->with('success', 'Absen berhasil diupdate.');
+        return back()->with('success', 'Absen berhasil diupdate.');
     }
 
     public function destroy($id)
@@ -100,6 +95,6 @@ class AbsensiController extends Controller
         // Menghapus objek absen
         $absen->delete();
 
-        return redirect()->route('absensi.index_admin')->with('success', 'Absen berhasil dihapus.');
+        return back()->with('success', 'Absen berhasil dihapus.');
     }
 }

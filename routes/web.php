@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // routes untuk admin
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/absensi/admin', [AbsensiController::class, 'index_admin'])->name('absensi.index_admin');
     Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store');
     Route::patch('/absensi/{id}', [AbsensiController::class, 'update'])->name('absensi.update');
