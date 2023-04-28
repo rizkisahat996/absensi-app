@@ -15,6 +15,15 @@
 																				<x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
 																								{{ __('Dashboard') }}
 																				</x-nav-link>
+																				@if (Auth::user()->level == 3)
+																								<x-nav-link :href="route('absensi.index_admin')" :active="request()->routeIs('absensi.index_admin')">
+																												{{ __('Absensi') }}
+																								</x-nav-link>
+																				@else
+																								<x-nav-link :href="route('absensi.index')" :active="request()->routeIs('absensi.index')">
+																												{{ __('Absensi') }}
+																								</x-nav-link>
+																				@endif
 																</div>
 												</div>
 
@@ -41,15 +50,21 @@
 																								<x-dropdown-link :href="route('profile.edit')">
 																												{{ __('Profile') }}
 																								</x-dropdown-link>
-																								<x-dropdown-link :href="route('absensi.index')">
-																												{{ __('Absensi') }}
-																								</x-dropdown-link>
+																								@if (Auth::user()->level == 3)
+																												<x-dropdown-link :href="route('absensi.index_admin')">
+																																{{ __('Absensi') }}
+																												</x-dropdown-link>
+																								@else
+																												<x-dropdown-link :href="route('absensi.index')">
+																																{{ __('Absensi') }}
+																												</x-dropdown-link>
+																								@endif
 
 																								<!-- Authentication -->
 																								<form method="POST" action="{{ route('logout') }}">
 																												@csrf
 
-																												<x-dropdown-link :href="route('logout')"
+																												<x-dropdown-link class="text-rose-500" :href="route('logout')"
 																																onclick="event.preventDefault();
                                                 this.closest('form').submit();">
 																																{{ __('Log Out') }}
@@ -81,10 +96,20 @@
 												<x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
 																{{ __('Dashboard') }}
 												</x-responsive-nav-link>
+
+												@if (Auth::user()->level == 3)
+																<x-responsive-nav-link :href="route('absensi.index_admin')" :active="request()->routeIs('absensi.index_admin')">
+																				{{ __('Absensi') }}
+																</x-responsive-nav-link>
+												@else
+																<x-responsive-nav-link :href="route('absensi.index')" :active="request()->routeIs('absensi.index_admin')">
+																				{{ __('Absensi') }}
+																</x-responsive-nav-link>
+												@endif
 								</div>
 
 								<!-- Responsive Settings Options -->
-								<div class="pt-4 pb-1 border-t border-gray-200">
+								<div class="pt-4 pb-1 border-t border-gray-700">
 												<div class="px-4">
 																<div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
 																<div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
@@ -99,7 +124,7 @@
 																<form method="POST" action="{{ route('logout') }}">
 																				@csrf
 
-																				<x-responsive-nav-link :href="route('logout')"
+																				<x-responsive-nav-link class="text-rose-500" :href="route('logout')"
 																								onclick="event.preventDefault();
                                         this.closest('form').submit();">
 																								{{ __('Log Out') }}
