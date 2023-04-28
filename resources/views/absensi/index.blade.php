@@ -4,8 +4,8 @@
 												{{ __('Absensi') }}
 								</h2>
 				</x-slot>
-				<div class="container mx-auto py-4 px-1">
-								<div class="py-4 px-4 bg-white border border-gray-800 rounded-lg mt-8 shadow-2xl w-full">
+				<div class="container mx-auto py-4 sm:px-6 grid place-content-center sm:justify-center sm:flex sm:flex-col sm:items-center">
+								<div class="py-4 bg-white px-4 border border-gray-800 rounded-lg mt-8 shadow-2xl w-full sm:max-w-2xl sm:px-6">
 												<div class="text-center font-semibold py-4 uppercase text-lg">Daftar Absensi</div>
 												<table class="table-striped gap-4 w-full">
 																<thead class="border-b border-gray-800">
@@ -37,12 +37,12 @@
 																																				@endif
 																												</td>
 																												<td>
-																																<div class="py-4 grid place">
+																																<div class="py-4 text-center">
 																																				@if ($absen->status ? 'disabled' : '')
 																																								<div class="text-center text-blue-600">submitted</div>
 																																				@else
 																																								<button type="submit"
-																																												class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300">Kirim</button>
+																																												class="bg-gray-800 text-sm text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300">Kirim</button>
 																																				@endif
 																																</div>
 																												</td>
