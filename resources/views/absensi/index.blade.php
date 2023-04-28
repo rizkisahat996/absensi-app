@@ -11,8 +11,8 @@
         <thead class="border-b border-gray-800">
           <tr class="">
             <th class="p-2">Tanggal</th>
-            <th class="p-2">Status</th>
             <th class="p-2">Keterangan</th>
+            <th class="p-2">Status</th>
             <th class="p-2">Aksi</th>
           </tr>
         </thead>
@@ -22,7 +22,7 @@
               <td class="p-2 text-center">{{ $absen->tanggal }}</td>
               <td class="p-2 text-center">{{ $absen->keterangan }}</td>
               <td class="p-2 text-center">
-                <form action="{{ route('absensi.update_user', $absen->id) }}" method="post">
+                <form action="{{ route('absensi.update_user', $absen->absensi_id) }}" method="post">
                   @csrf
                   @method('PATCH')
                   <select name="status" id="status" class="rounded border border-gray-800" required>

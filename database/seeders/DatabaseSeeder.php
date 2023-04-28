@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Rizki Sahat',
+            'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),
             'level' => '3'
         ]);
         User::create([
-            'name' => 'Rizki Sahat',
+            'name' => 'User',
             'email' => 'user@gmail.com',
             'password' => bcrypt('password'),
             'level' => '1'

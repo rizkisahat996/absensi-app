@@ -44,7 +44,22 @@
 																	{{-- @foreach ($absensi as $absen) --}}
 																		<div class="col-start-1 col-end-4">{{ $absen->user->name }}</div>
 																		@if ($absen->status !== null)
-																			<div class="col-start-5 col-end-7">{{ $absen->status }}</div>
+																		<form action="{{ route('absensi.update_user', $absen->absensi_id) }}" method="post">
+																			@csrf
+																			@method('PATCH')
+																			<select name="status" id="status" class="rounded border border-gray-800" required>
+																			  <option value="hadir" {{ $absen->status == 'hadir' ? 'selected' : '' }}>Hadir</option>
+																			  <option value="izin" {{ $absen->status == 'izin' ? 'selected' : '' }}>Izin</option>
+																			  <option value="telat" {{ $absen->status == 'telat' ? 'selected' : '' }}>Telat</option>
+																			</select>
+																		</td>
+																		<td>
+																			
+																		  <div class="py-4 grid place">
+																			<button type="submit" class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300">Kirim</button>
+																		  </div>
+																		</td>
+																	  </form>
 																		@else
 																			<div class="col-start-5 col-end-7">No Attendance Yet</div>
 																		@endif

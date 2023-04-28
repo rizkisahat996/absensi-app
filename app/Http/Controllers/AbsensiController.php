@@ -19,6 +19,8 @@ class AbsensiController extends Controller
                         ->where('user_id', $user_id)
                         ->get();
 
+                        // dd($absensi);
+
         return view('absensi.index', compact('absensi'));
     }
 
@@ -58,9 +60,12 @@ class AbsensiController extends Controller
 
     public function update_user(Request $request, $id)
     {
-        // Mendapatkan objek absen berdasarkan ID dan user ID
-        $absen = Absen::where('id', $id)->where('user_id', auth()->user()->id)->firstOrFail();
 
+        // Mendapatkan objek absen berdasarkan ID dan user ID
+        // $absen = Absen::where('user_id', auth()->user()->id)->find($id);
+        $absen = Absen::where('absensi_id', $id)->where('user_id', auth()->user()->id)->first();
+
+        // dd($absen);
         // Memperbarui status pada objek absen
         $absen->status = $request->status;
 
@@ -71,6 +76,7 @@ class AbsensiController extends Controller
     }
 
 
+
     public function update(Request $request, $id)
     {
         // Mendapatkan objek absen berdasarkan ID
@@ -78,7 +84,7 @@ class AbsensiController extends Controller
 
         // Memperbarui status dan keterangan pada objek absen
         $absen->status = $request->status;
-        $absen->keterangan = $request->keterangan;
+        // dd($absen);
 
         // Menyimpan perubahan pada objek absen
         $absen->save();

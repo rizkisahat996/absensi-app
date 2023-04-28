@@ -16,4 +16,5 @@ class Absensi extends Model
     {
         return $this->hasMany(Absen::class);
     }
+
 }
