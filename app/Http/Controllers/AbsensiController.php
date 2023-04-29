@@ -28,7 +28,14 @@ class AbsensiController extends Controller
   public function index_admin()
   {
     // Mendapatkan semua data absensi
-    $absensi = Absen::get();
+    $absensi = Absen::with('user', 'absensi')
+                    ->orderBy('created_at')
+                    ->get()
+                    ->groupBy(function($data) {
+                        return $data->absensi->tanggal;
+                    });
+
+    // dd($absensi);
 
     return view('absensi.index_admin', compact('absensi'));
   }
