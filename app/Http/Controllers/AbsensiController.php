@@ -19,8 +19,6 @@ class AbsensiController extends Controller
       ->where('user_id', $user_id)
       ->get();
 
-    // dd($absensi);
-
     return view('absensi.index', compact('absensi'));
   }
 
@@ -34,8 +32,6 @@ class AbsensiController extends Controller
       ->groupBy(function ($data) {
         return $data->absensi->tanggal;
       });
-
-    // dd($absensi);
 
     return view('absensi.index_admin', compact('absensi'));
   }
@@ -67,10 +63,8 @@ class AbsensiController extends Controller
   {
 
     // Mendapatkan objek absen berdasarkan ID dan user ID
-    // $absen = Absen::where('user_id', auth()->user()->id)->find($id);
     $absen = Absen::where('absensi_id', $id)->where('user_id', auth()->user()->id)->first();
 
-    // dd($absen);
     // Memperbarui status pada objek absen
     $absen->status = $request->status;
 

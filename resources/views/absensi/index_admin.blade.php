@@ -14,18 +14,6 @@
         </div>
         <x-modal-add />
       </div>
-      {{-- <div class="flex justify-end" x-show="open">
-          <form action="{{ route('absensi.store') }}" method="post">
-              @csrf
-              <label for="tanggal" class="block">Tanggal:</label>
-              <input type="date" name="tanggal" id="tanggal" class="w-full rounded border border-gray-800" required>
-              <label for="keterangan" class="block">Keterangan:</label>
-              <textarea name="keterangan" id="keterangan" class="w-full rounded border border-gray-800"></textarea>
-              <div class="py-4 grid place">
-                  <button type="submit" class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300">Kirim</button>
-              </div>
-          </form>
-      </div> --}}
     </div>
 
     @foreach ($absensi as $tanggal => $absen)
@@ -74,13 +62,6 @@
                   </form>
                 </div>
               @endif
-              {{-- @if ($absen->user->level !== '3')
-              <div class="col-start-1 col-end-4">{{ $absen->user->name }}</div>
-              @if ($absen->status !== null)
-              <div>masukan form</div>
-              @else
-              @endif
-              @endif --}}
             @endforeach
       </div>
     </div>

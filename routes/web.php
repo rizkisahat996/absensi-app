@@ -34,7 +34,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/absensi/admin', [AbsensiController::class, 'index_admin'])->name('absensi.index_admin');
     Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store');
     Route::patch('/absensi/{id}', [AbsensiController::class, 'update'])->name('absensi.update');
-    Route::delete('/absensi/{id}', [AbsensiController::class, 'destroy'])->name('absensi.destroy');
 });
 
 
