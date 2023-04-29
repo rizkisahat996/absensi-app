@@ -29,11 +29,11 @@ class AbsensiController extends Controller
   {
     // Mendapatkan semua data absensi
     $absensi = Absen::with('user', 'absensi')
-                    ->orderBy('created_at')
-                    ->get()
-                    ->groupBy(function($data) {
-                        return $data->absensi->tanggal;
-                    });
+      ->orderBy('created_at')
+      ->get()
+      ->groupBy(function ($data) {
+        return $data->absensi->tanggal;
+      });
 
     // dd($absensi);
 
