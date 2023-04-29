@@ -87,15 +87,4 @@ class AbsensiController extends Controller
 
     return back()->with('success', 'Absen berhasil diupdate.');
   }
-
-  public function destroy($id)
-  {
-    // Mendapatkan objek absen berdasarkan ID
-    $absen = Absen::find($id);
-
-    // Menghapus objek absen
-    $absen->delete();
-
-    return back()->with('success', 'Absen berhasil dihapus.');
-  }
 }

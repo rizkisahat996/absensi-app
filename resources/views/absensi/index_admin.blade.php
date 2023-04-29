@@ -26,16 +26,12 @@
             <i class="fa-solid fa-eye"></i>
             <span>View</span>
           </button>
-          <button href="#" class="bg-rose-600 py-1 px-2 text-white text-sm rounded hover:bg-rose-500 duration-200">
-            <i class="fa-solid fa-trash"></i>
-            <span>Delete</span>
-          </button>
         </div>
       </div>
-      <div class="cols-span-full grid grid-cols-12 w-full py-2" x-transition x-show="open">
-        <div class="col-start-1 col-end-4 font-semibold">User</div>
-        <div class="col-start-5 col-end-7 font-semibold sm:text-center text-start">Status</div>
-        <div class="col-start-8 col-end-13 font-semibold text-center">Action</div>
+      <div class="cols-span-full grid grid-cols-12 w-full pt-3" x-transition x-show="open">
+        <div class="col-start-1 col-end-4 font-bold">User</div>
+        <div class="col-start-5 col-end-7 font-bold sm:text-center text-start">Status</div>
+        <div class="col-start-8 col-end-13 font-bold text-center">Action</div>
             @foreach ($absen as $absen)
               @if ($absen->user->level !== '3')
                 <div class="col-start-1 col-end-4 py-2">{{ $absen->user->name }}</div>
@@ -54,7 +50,7 @@
                       <option value="telat" {{ $absen->status == 'telat' ? 'selected' : '' }}>Telat</option>
                     </select>
                     <div class="">
-                      <button type="submit" class="bg-gray-800 text-white py-1 px-4 rounded-md hover:bg-gray-600 duration-300">
+                      <button type="submit" class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-600 duration-300">
                         <i class="fa-solid fa-paper-plane"></i>
                         <span>Kirim</span>
                       </button>
