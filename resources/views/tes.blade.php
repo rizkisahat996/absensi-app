@@ -20,7 +20,7 @@
 				<div id="desktop-view" class="min-h-screen min-w-full bg-center bg-cover md:flex hidden"
 								style="background-image: url('{{ asset('/image/bg-2.png') }}')">
 								<div
-												class="grid place-content-center min-h-screen min-w-full md:flex md:flex-col md:justify-center md:items-center md:px-12">
+												class="grid place-content-center min-h-screen min-w-full md:flex md:flex-col md:justify-center md:items-center md:px-12 md:py-12">
 												<div class="mb-4 w-full md:max-w-sm text-center">
 																<div class="bg-white border-2 border-[#510A32] py-2 rounded-sm">
 																				<div class="font-semibold">Location</div>
@@ -47,7 +47,7 @@
 																																<span>Nama Lengkap</span>
 																												</label>
 																												<input class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
-																																type="text">
+																																type="text" placeholder="John Doe">
 																								</div>
 																								<div class="mb-3">
 																												<label class="block text-white text-sm" for="">
@@ -55,7 +55,7 @@
 																																<span>Email</span>
 																												</label>
 																												<input class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
-																																type="text">
+																																type="text" placeholder="JohnDoe@gmail.com">
 																								</div>
 																								<div class="mb-3">
 																												<label class="block text-white" for="">
@@ -70,8 +70,10 @@
 																																<i class="fa-solid fa-signature"></i>
 																																<span>Tanda Tangan</span>
 																												</label>
-																												<input class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
-																																type="text">
+																												<canvas
+																																class="bg-white w-full h-32 border-2 border-[#510A32] shadow-xl rounded-md"></canvas>
+																												{{-- <input class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
+																																type="text"> --}}
 																												<button
 																																class="bg-white mt-2 py-1 px-2 text-sm rounded-md border-2 border-[#510A32] hover:bg-white/10 duration-200 hover:text-white">Reset</button>
 																								</div>
