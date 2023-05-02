@@ -11,15 +11,6 @@
 				<link rel="preconnect" href="https://fonts.bunny.net">
 				<link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 				<script src="https://kit.fontawesome.com/cf4dce0a52.js" crossorigin="anonymous"></script>
-				<style>
-								body {
-												background: url("../../public/image/background.png");
-												background-position: center center;
-												background-repeat: no-repeat;
-												background-size: 100% 100%;
-								}
-				</style>
-
 				<!-- Scripts -->
 				@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
