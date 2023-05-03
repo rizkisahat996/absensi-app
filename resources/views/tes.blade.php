@@ -79,6 +79,7 @@
   </div>
 
   <div id="mobile-view" class="min-h-screen min-w-full bg-center bg-cover md:hidden flex" style="background-image: url('{{ asset('/image/bg-2.png') }}')">
+
     <div class="min-w-full min-h-screen">
       <div class="w-full md:max-w-sm text-center text-[#510A32] px-14 py-5">
         <div class="bg-white border-2 border-[#510A32] py-2 rounded-sm w-full">
@@ -88,8 +89,8 @@
         </div>
       </div>
 
-      <div class="bg-white/30 min-w-full rounded-t-3xl px-10 pb-5">
-        <div class="text-3xl text-center py-4 font-semibold text-white">Form Absensi</div>
+      <div class="bg-white bg-opacity-30 min-w-full rounded-t-3xl px-10 pb-5">
+        <div class="text-3xl text-center py-6 font-semibold text-white">Form Absensi</div>
           <form action="">
             <div class="mb-3">
               <label class="block text-white text-sm" for="nama">
@@ -119,7 +120,7 @@
                 <i class="fa-solid fa-signature"></i>
                 <span>Tanda Tangan</span>
               </label>
-              <canvas id="signatureCanvas" class="bg-white w-full border-2 border-[#510A32] shadow-xl rounded-md"></canvas>
+              <canvas id="signatureCanvas" class="bg-white w-full h-32 border-2 border-[#510A32] shadow-xl rounded-md"></canvas>
               <button id="clearButton" class="bg-white mt-2 py-1 px-2 text-sm rounded-md border-2 border-[#510A32] hover:bg-white/10 duration-200 hover:text-white">Reset</button>
             </div>
             <div id="btn-submit" class="flex justify-end items-center">
