@@ -13,6 +13,20 @@
   <script src="https://kit.fontawesome.com/cf4dce0a52.js" crossorigin="anonymous"></script>
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+  <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet"> 
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
+
+  <style>
+      .kbw-signature { width: 100%; height: 200px;}
+      #sig canvas{
+          width: 100% !important;
+          height: auto;
+      }
+  </style>
 </head>
 
 <body class="bg-gradient-to-br from-[#510A32] from-10% via-[#C72C41] via-30% to-[#C72C41] to-90% min-h-screen min-w-full">
@@ -58,7 +72,13 @@
                 <span>Skema</span>
               </label>
               <select class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl" name="skema" id="">
-                <option value="">Pilih Skema</option>
+                @foreach ($skema as $skema)
+                  @if (old('skema_id') == $skema->id)
+                      <option value="{{ $skema->id }}" selected>{{ $skema->skema }}</option>
+                  @else
+                      <option value="{{ $skema->id }}">{{ $skema->skema }}</option>
+                  @endif
+                @endforeach
               </select>
             </div>
             <div class="mb-3">
@@ -66,8 +86,9 @@
                 <i class="fa-solid fa-signature"></i>
                 <span>Tanda Tangan</span>
               </label>
-              <canvas id="signatureCanvas" class="bg-white w-full h-32 border-2 border-[#510A32] shadow-xl rounded-md"></canvas>
-              <button id="clearButton" class="bg-white mt-2 py-1 px-2 text-sm rounded-md border-2 border-[#510A32] hover:bg-white/10 duration-200 hover:text-white">Reset</button>
+              <div id="sig" ></div>
+              <button id="clear" class="bg-white mt-2 py-1 px-2 text-sm rounded-md border-2 border-[#510A32] hover:bg-white/10 duration-200 hover:text-white">Reset</button>
+              <textarea id="signature64" name="signed" style="display: none"></textarea>
             </div>
             <div id="btn-submit" class="flex justify-end items-center">
               <button class="bg-[#510A32] text-white py-2 px-4 rounded-lg hover:bg-[#510A32]/80 duration-200 shadow-lg">Submit</button>
@@ -120,8 +141,9 @@
                 <i class="fa-solid fa-signature"></i>
                 <span>Tanda Tangan</span>
               </label>
-              <canvas id="signatureCanvas" class="bg-white w-full h-32 border-2 border-[#510A32] shadow-xl rounded-md"></canvas>
-              <button id="clearButton" class="bg-white mt-2 py-1 px-2 text-sm rounded-md border-2 border-[#510A32] hover:bg-white/10 duration-200 hover:text-white">Reset</button>
+              <div id="sig" ></div>
+              <button id="clear" class="bg-white mt-2 py-1 px-2 text-sm rounded-md border-2 border-[#510A32] hover:bg-white/10 duration-200 hover:text-white">Reset</button>
+              <textarea id="signature64" name="signed" style="display: none"></textarea>
             </div>
             <div id="btn-submit" class="flex justify-end items-center">
               <button class="bg-[#510A32] text-white py-2 px-4 rounded-lg hover:bg-[#510A32]/80 duration-200 shadow-lg">Submit</button>
@@ -131,8 +153,13 @@
     </div>
   </div>
 
-  <script>
-
-  </script>
+  <script type="text/javascript">
+    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
+    $('#clear').click(function(e) {
+        e.preventDefault();
+        sig.signature('clear');
+        $("#signature64").val('');
+    });
+</script>
 </body>
 </html>
