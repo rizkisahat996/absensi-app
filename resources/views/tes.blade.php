@@ -21,15 +21,16 @@
 								style="background-image: url('{{ asset('/image/bg-2.png') }}')">
 								<div
 												class="grid place-content-center min-h-screen min-w-full md:flex md:flex-col md:justify-center md:items-center md:px-12 md:py-12">
-												<div class="mb-4 w-full md:max-w-sm text-center">
-																<div class="bg-white border-2 border-[#510A32] py-2 rounded-sm">
-																				<div class="font-semibold">Location</div>
-																				<div class="text-5xl">12:12</div>
-																				<div class="font-semibold">12 September 2022</div>
-																</div>
-												</div>
+
 												<div class="grid grid-cols-2 border border-[#510A32] rounded-lg w-full md:max-w-5xl">
-																<div class="col-span-1 bg-[#C72C41] w-full p-4 rounded-l-lg px-20 py-10 grid place-content-center">
+																<div class="col-span-1 bg-[#C72C41] w-full rounded-l-lg px-14 py-20">
+																				<div class="pb-10 w-full md:max-w-sm text-center text-[#510A32]">
+																								<div class="bg-white border-2 border-[#510A32] py-2 rounded-sm">
+																												<div class="font-semibold">Location</div>
+																												<div class="text-5xl">12:12</div>
+																												<div class="font-semibold">12 September 2022</div>
+																								</div>
+																				</div>
 																				<div class="flex justify-center items-center mb-6">
 																								<img src="{{ asset('image/desktop.png') }}" alt="">
 																				</div>
@@ -42,42 +43,44 @@
 																				<div class="text-3xl text-center py-4 font-semibold text-white">Form Absensi</div>
 																				<form action="">
 																								<div class="mb-3">
-																												<label class="block text-white text-sm" for="">
+																												<label class="block text-white text-sm" for="nama">
 																																<i class="fa-solid fa-user"></i>
 																																<span>Nama Lengkap</span>
 																												</label>
-																												<input class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
+																												<input id="" name="nama"
+																																class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
 																																type="text" placeholder="John Doe">
 																								</div>
 																								<div class="mb-3">
-																												<label class="block text-white text-sm" for="">
+																												<label class="block text-white text-sm" for="email">
 																																<i class="fa-solid fa-envelope"></i>
 																																<span>Email</span>
 																												</label>
-																												<input class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
+																												<input id="" name="email"
+																																class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
 																																type="text" placeholder="JohnDoe@gmail.com">
 																								</div>
 																								<div class="mb-3">
-																												<label class="block text-white" for="">
+																												<label class="block text-white" for="skema">
 																																<i class="fa-solid fa-building"></i>
 																																<span>Skema</span>
 																												</label>
-																												<input class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
-																																type="text">
+																												<select class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
+																																name="skema" id="">
+																																<option value="">Pilih Skema</option>
+																												</select>
 																								</div>
 																								<div class="mb-3">
-																												<label class="block text-white" for="">
+																												<label class="block text-white" for="signature">
 																																<i class="fa-solid fa-signature"></i>
 																																<span>Tanda Tangan</span>
 																												</label>
-																												<canvas
-																																class="bg-white w-full h-32 border-2 border-[#510A32] shadow-xl rounded-md"></canvas>
-																												{{-- <input class="rounded-md border-2 border-[#510A32] text-[#510A32] w-full shadow-xl"
-																																type="text"> --}}
-																												<button
+																												<canvas id="signatureCanvas"
+																																class="bg-white w-full border-2 border-[#510A32] shadow-xl rounded-md"></canvas>
+																												<button id="clearButton"
 																																class="bg-white mt-2 py-1 px-2 text-sm rounded-md border-2 border-[#510A32] hover:bg-white/10 duration-200 hover:text-white">Reset</button>
 																								</div>
-																								<div class="flex justify-end items-center">
+																								<div id="btn-submit" class="flex justify-end items-center">
 																												<button
 																																class="bg-[#510A32] text-white py-2 px-4 rounded-lg hover:bg-[#510A32]/80 duration-200 shadow-lg">Submit</button>
 																								</div>
@@ -92,6 +95,8 @@
 								<div>HALO</div>
 				</div>
 
+				<script></script>
 </body>
+
 
 </html>
