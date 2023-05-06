@@ -25,20 +25,22 @@
 <!-- START VIEW -->
   <div id="desktop-view" class="bg-image" style="background-image: url('{{ asset('/image/bg-2.png') }}')">
     <div class="min-h-screen min-w-full md:flex md:flex-col md:justify-center md:items-center md:px-12 md:py-12 py-5">
+
+      <!-- Time Card Mobile -->
       <div class="md:hidden px-10 w-full md:max-w-sm pb-5">
         <div class="time-content">
-          <div>Location</div>
-          <div class="text-5xl font-thin">12:12</div>
-          <div>12 September 2022</div>
+          <div id="time-1" class="text-5xl font-thin"></div>
+          <div id="date-1"></div>
         </div>
       </div>
+
+      <!-- Time Card & Welcome Desktop -->
       <div class="grid grid-cols-2 card-content">
         <div class="hidden md:grid col-span-1 card-welcome">
           <div class="w-full md:max-w-sm pb-10">
             <div class="time-content">
-              <div>Location</div>
-              <div class="text-5xl font-thin">12:12</div>
-              <div>12 September 2022</div>
+              <div id="time-2" class="text-5xl font-thin"></div>
+              <div id="date-2"></div>
             </div>
           </div>
           <div class="flex justify-center items-center mb-6">
@@ -50,19 +52,32 @@
           </div>
         </div>
 
-        <div class="card-form col-span-full md:col-span-1 ">
+        <div class="card-form col-span-full md:col-span-1">
           <div class="title-form">Form Absensi</div>
           <form action="{{ route('absen.store') }}" method="POST">
             @csrf
-            <div id="field-1" class="mb-3">
-              <label class="label-name" for="nama">
-                <i class="fa-solid fa-user"></i>
-                <span>Nama Lengkap</span>
+            <!-- Form Tanda Tangan -->
+            <div id="field-1" class="py-10">
+              <label class="label-name">
+                <i class="fa-solid fa-signature"></i>
+                <span>Tanda Tangan</span>
               </label>
-              <input name="nama" class="input-field" type="text" placeholder="John Doe" required>
+              <div id="sig"></div>
+              <button id="clear" class="reset-btn">Reset</button>
+              <textarea id="signature64" name="signed" style="display: none"></textarea>
             </div>
 
-            <div id="field-2" class="mb-3 field hidden">
+            <!-- Form Nama Lengkap -->
+              <div id="field-2" class="py-20 field hidden">
+                <label class="label-name" for="nama">
+                  <i class="fa-solid fa-user"></i>
+                  <span>Nama Lengkap</span>
+                </label>
+                <input name="nama" class="input-field" type="text" placeholder="John Doe" required>
+              </div>
+
+            <!-- Form Skema -->
+            <div id="field-3" class="py-20 field hidden">
               <label class="label-name" for="skema">
                 <i class="fa-solid fa-building"></i>
                 <span>Skema</span>
@@ -78,12 +93,13 @@
               </select>
             </div>
 
-            <div id="field-3" class="mb-3 field hidden">
-              <label class="label-name" for="status">
+            <!-- Form Status -->
+            <div id="field-4" class="py-20 field hidden">
+              <label class="label-name" for="status-field">
                 <i class="fa-solid fa-bell"></i>
                 <span>Status</span>
               </label>
-              <select id="status" name="status" class="select-option" type="text" placeholder="JohnDoe@gmail.com" required>
+              <select id="status-field" name="status" class="select-option" placeholder="JohnDoe@gmail.com" required>
                 <option value="">-Pilih Status-</option>
                 <option value="hadir">Hadir</option>
                 <option value="izin">Izin</option>
@@ -91,33 +107,33 @@
               </select>
             </div>
 
-            <div id="field-4" class="mb-3 field hidden">
-              <label class="label-name" for="nama">
+            <!-- Form Keterangan -->
+            <div id="field-5" class="py-20 field hidden">
+              <label class="label-name" for="keterangan">
                 <i class="fa-solid fa-pen"></i>
                 <span>Keterangan</span>
               </label>
-              <select id="keterangan" name="keterangan" class="select-option" type="text" placeholder="John Doe" required>
+              <select id="keterangan" name="keterangan" class="select-option" required>
                 <option value="">-Pilih Keterangan-</option>
                 <option value="Administrasi Umum dan Keuangan">Administrasi Umum dan Keuangan</option>
                 <option value="Mutu">Mutu</option>
                 <option value="Sistem">Sistem</option>
                 <option value="Sertifikasi">Sertifikasi</option>
-                <option value="Lainnya">Lainnya</option>
+                <option value="Lainya">Lainya</option>
               </select>
             </div>
 
-            <div id="field-5" class="mb-3 field">
-              <label class="label-name" for="signature">
-                <i class="fa-solid fa-signature"></i>
-                <span>Tanda Tangan</span>
-              </label>
-              <div id="sig"></div>
-              <button id="clear" class="reset-btn">Reset</button>
-              <textarea id="signature64" name="signed" style="display: none"></textarea>
+            <!-- Form Button -->
+            <div class="grid grid-cols-2">
+              <div class="col-span-1 flex justify-start items-center">
+                <button id="prev-btn" class="submit-btn hidden" type="button">Previous</button>
+              </div>
+              <div class="col-span-1 flex justify-end items-center">
+                <button id="next-btn" class="submit-btn" type="button">Next</button>
+                <button id="submit-btn" class="submit-btn hidden" type="submit">Submit</button>
+              </div>
             </div>
-            <button id="prev-btn" class="submit-btn hidden">Previous</button>
-            <button id="next-btn" class="submit-btn">Next</button>
-            <button id="submit-btn" class="submit-btn hidden" type="submit">Submit</button>
+
           </form>
         </div>
       </div>
@@ -126,14 +142,17 @@
 <!-- END VIEW -->
 
   <script type="text/javascript">
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
+    //Function Signature
+    var sig = $('#sig').signature({
+      syncField: '#signature64',
+      syncFormat: 'PNG'});
     $('#clear').click(function(e) {
         e.preventDefault();
         sig.signature('clear');
         $("#signature64").val('');
     });
-</script>
-<script>
+
+    //Function Prev & Next Button
     let currentField = 1;
     const fieldCount = 5;
     const prevBtn = document.getElementById('prev-btn');
@@ -169,6 +188,43 @@
     nextBtn.addEventListener('click', function() {
         showField(currentField + 1);
     });
-</script>
+
+      //Function Time
+      function displayTime() {
+      var date = new Date();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+
+      hours = (hours < 10 ? "0" : "") + hours;
+      minutes = (minutes < 10 ? "0" : "") + minutes;
+      seconds = (seconds < 10 ? "0" : "") + seconds;
+
+      var time = hours + ":" + minutes + ":" + seconds;
+
+      document.getElementById("time-1").innerHTML = time;
+      document.getElementById("time-2").innerHTML = time;
+    }
+
+    setInterval(displayTime, 1000);
+
+    //Function Date
+    function getCurrentDateTime() {
+      const months = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+      const currentdate = new Date();
+      const datetime = currentdate.getDate() + " "
+                    + months[currentdate.getMonth()] + " "
+                    + currentdate.getFullYear()
+      return datetime;
+    }
+
+    setInterval(function() {
+      var currentTime = getCurrentDateTime();
+      document.getElementById("date-1").innerHTML = currentTime;
+      document.getElementById("date-2").innerHTML = currentTime;
+    }, 1000);
+
+  </script>
 </body>
 </html>

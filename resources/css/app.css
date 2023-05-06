@@ -23,7 +23,7 @@
 }
 
 .label-name {
-    @apply block text-white text-sm;
+    @apply block text-white;
 }
 
 .reset-btn {
@@ -35,7 +35,7 @@
 }
 
 .title-form {
-    @apply text-3xl text-center py-4 font-semibold text-white;
+    @apply text-4xl text-center font-semibold text-white;
 }
 
 .card-form {
