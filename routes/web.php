@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/absen', [AbsenController::class, 'index'])->name('absen.index');
-Route::post('/absenStore', [AbsenController::class, 'store'])->name('absen.store');
+Route::get('/', [AbsenController::class, 'index'])->name('absen.index');
+Route::post('/store', [AbsenController::class, 'store'])->name('absen.store');

@@ -50,16 +50,16 @@
           </div>
         </div>
 
-        <div class="card-form col-span-full md:col-span-1">
+        <div class="card-form col-span-full md:col-span-1 ">
           <div class="title-form">Form Absensi</div>
-          <form action="">
-
+          <form action="{{ route('absen.store') }}" method="POST">
+            @csrf
             <div id="field-1" class="mb-3">
               <label class="label-name" for="nama">
                 <i class="fa-solid fa-user"></i>
                 <span>Nama Lengkap</span>
               </label>
-              <input id="" name="nama" class="input-field" type="text" placeholder="John Doe" required>
+              <input name="nama" class="input-field" type="text" placeholder="John Doe" required>
             </div>
 
             <div id="field-2" class="mb-3 field hidden">
@@ -67,7 +67,7 @@
                 <i class="fa-solid fa-building"></i>
                 <span>Skema</span>
               </label>
-              <select class="select-option" name="skema" id="" required>
+              <select class="select-option" name="skema" required>
                 @foreach ($skema as $skema)
                   @if (old('skema_id') == $skema->id)
                       <option value="{{ $skema->id }}" selected>{{ $skema->skema }}</option>
@@ -85,9 +85,9 @@
               </label>
               <select id="status" name="status" class="select-option" type="text" placeholder="JohnDoe@gmail.com" required>
                 <option value="">-Pilih Status-</option>
-                <option value="">Hadir</option>
-                <option value="">Izin</option>
-                <option value="">Sakit</option>
+                <option value="hadir">Hadir</option>
+                <option value="izin">Izin</option>
+                <option value="sakit">Sakit</option>
               </select>
             </div>
 
@@ -98,11 +98,11 @@
               </label>
               <select id="keterangan" name="keterangan" class="select-option" type="text" placeholder="John Doe" required>
                 <option value="">-Pilih Keterangan-</option>
-                <option value="">Administrasi Umum dan Keuangan</option>
-                <option value="">Mutu</option>
-                <option value="">Sistem</option>
-                <option value="">Sertifikasi</option>
-                <option value="">Lainya</option>
+                <option value="Administrasi Umum dan Keuangan">Administrasi Umum dan Keuangan</option>
+                <option value="Mutu">Mutu</option>
+                <option value="Sistem">Sistem</option>
+                <option value="Sertifikasi">Sertifikasi</option>
+                <option value="Lainnya">Lainnya</option>
               </select>
             </div>
 
@@ -118,7 +118,6 @@
             <button id="prev-btn" class="submit-btn hidden">Previous</button>
             <button id="next-btn" class="submit-btn">Next</button>
             <button id="submit-btn" class="submit-btn hidden" type="submit">Submit</button>
-
           </form>
         </div>
       </div>
