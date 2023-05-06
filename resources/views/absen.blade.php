@@ -24,7 +24,7 @@
 <body class="bg-main">
 <!-- START VIEW -->
   <div id="desktop-view" class="bg-image" style="background-image: url('{{ asset('/image/bg-2.png') }}')">
-    <div class="grid place-content-center min-h-screen min-w-full md:flex md:flex-col md:justify-center md:items-center md:px-12 md:py-12 py-5">
+    <div class="min-h-screen min-w-full md:flex md:flex-col md:justify-center md:items-center md:px-12 md:py-12 py-5">
       <div class="md:hidden px-10 w-full md:max-w-sm pb-5">
         <div class="time-content">
           <div>Location</div>
@@ -53,7 +53,8 @@
         <div class="card-form col-span-full md:col-span-1">
           <div class="title-form">Form Absensi</div>
           <form action="">
-            <div class="mb-3">
+
+            <div id="field-1" class="mb-3">
               <label class="label-name" for="nama">
                 <i class="fa-solid fa-user"></i>
                 <span>Nama Lengkap</span>
@@ -61,7 +62,7 @@
               <input id="" name="nama" class="input-field" type="text" placeholder="John Doe" required>
             </div>
 
-            <div class="mb-3">
+            <div id="field-2" class="mb-3 field hidden">
               <label class="label-name" for="skema">
                 <i class="fa-solid fa-building"></i>
                 <span>Skema</span>
@@ -77,36 +78,35 @@
               </select>
             </div>
 
-            <div class="grid grid-cols-2 mb-3 gap-2">
-              <div class="col-span-1">
-                <label class="label-name" for="status">
-                  <i class="fa-solid fa-bell"></i>
-                  <span>Status</span>
-                </label>
-                <select id="status" name="status" class="select-option" type="text" placeholder="JohnDoe@gmail.com" required>
-                  <option value="">-Pilih Status-</option>
-                  <option value="">Hadir</option>
-                  <option value="">Izin</option>
-                  <option value="">Sakit</option>
-                </select>
-              </div>
-              <div class="col-span-1">
-                <label class="label-name" for="nama">
-                  <i class="fa-solid fa-pen"></i>
-                  <span>Keterangan</span>
-                </label>
-                <select id="keterangan" name="keterangan" class="select-option" type="text" placeholder="John Doe" required>
-                  <option value="">-Pilih Keterangan-</option>
-                  <option value="">Administrasi Umum dan Keuangan</option>
-                  <option value="">Mutu</option>
-                  <option value="">Sistem</option>
-                  <option value="">Sertifikasi</option>
-                  <option value="">Lainya</option>
-                </select>
-              </div>
+            <div id="field-3" class="mb-3 field hidden">
+              <label class="label-name" for="status">
+                <i class="fa-solid fa-bell"></i>
+                <span>Status</span>
+              </label>
+              <select id="status" name="status" class="select-option" type="text" placeholder="JohnDoe@gmail.com" required>
+                <option value="">-Pilih Status-</option>
+                <option value="">Hadir</option>
+                <option value="">Izin</option>
+                <option value="">Sakit</option>
+              </select>
             </div>
 
-            <div class="mb-3">
+            <div id="field-4" class="mb-3 field hidden">
+              <label class="label-name" for="nama">
+                <i class="fa-solid fa-pen"></i>
+                <span>Keterangan</span>
+              </label>
+              <select id="keterangan" name="keterangan" class="select-option" type="text" placeholder="John Doe" required>
+                <option value="">-Pilih Keterangan-</option>
+                <option value="">Administrasi Umum dan Keuangan</option>
+                <option value="">Mutu</option>
+                <option value="">Sistem</option>
+                <option value="">Sertifikasi</option>
+                <option value="">Lainya</option>
+              </select>
+            </div>
+
+            <div id="field-5" class="mb-3 field">
               <label class="label-name" for="signature">
                 <i class="fa-solid fa-signature"></i>
                 <span>Tanda Tangan</span>
@@ -115,13 +115,12 @@
               <button id="clear" class="reset-btn">Reset</button>
               <textarea id="signature64" name="signed" style="display: none"></textarea>
             </div>
+            <button id="prev-btn" class="submit-btn hidden">Previous</button>
+            <button id="next-btn" class="submit-btn">Next</button>
+            <button id="submit-btn" class="submit-btn hidden" type="submit">Submit</button>
 
-            <div id="btn-submit" class="flex justify-end items-center">
-              <button class="submit-btn">Submit</button>
-            </div>
           </form>
         </div>
-
       </div>
     </div>
   </div>
@@ -133,6 +132,43 @@
         e.preventDefault();
         sig.signature('clear');
         $("#signature64").val('');
+    });
+</script>
+<script>
+    let currentField = 1;
+    const fieldCount = 5;
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function showField(fieldNum) {
+        const prevField = document.getElementById('field-' + currentField);
+        const nextField = document.getElementById('field-' + fieldNum);
+
+        prevField.classList.add('hidden');
+        nextField.classList.remove('hidden');
+        currentField = fieldNum;
+
+        if (currentField === 1) {
+            prevBtn.classList.add('hidden');
+        } else {
+            prevBtn.classList.remove('hidden');
+        }
+
+        if (currentField === fieldCount) {
+            nextBtn.classList.add('hidden');
+            document.getElementById('submit-btn').classList.remove('hidden');
+        } else {
+            nextBtn.classList.remove('hidden');
+            document.getElementById('submit-btn').classList.add('hidden');
+        }
+    }
+
+    prevBtn.addEventListener('click', function() {
+        showField(currentField - 1);
+    });
+
+    nextBtn.addEventListener('click', function() {
+        showField(currentField + 1);
     });
 </script>
 </body>
