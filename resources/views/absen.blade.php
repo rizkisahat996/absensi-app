@@ -101,9 +101,9 @@
               </label>
               <select id="status-field" name="status" class="select-option" placeholder="JohnDoe@gmail.com" required>
                 <option value="">-Pilih Status-</option>
-                <option value="hadir">Hadir</option>
-                <option value="izin">Izin</option>
-                <option value="sakit">Sakit</option>
+                <option value="Hadir">Hadir</option>
+                <option value="Izin">Izin</option>
+                <option value="Sakit">Sakit</option>
               </select>
             </div>
 
