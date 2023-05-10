@@ -171,11 +171,8 @@ return [
     // App\Providers\BroadcastServiceProvider::class,
     App\Providers\EventServiceProvider::class,
     App\Providers\RouteServiceProvider::class,
+    RealRashid\SweetAlert\SweetAlertServiceProvider::class
 
-    /*
-    * Package Service Providers...
-    */
-    RealRashid\SweetAlert\SweetAlertServiceProvider::class,
   ])->toArray(),
 
   /*

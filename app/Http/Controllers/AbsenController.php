@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class AbsenController extends Controller
@@ -52,6 +53,6 @@ class AbsenController extends Controller
       'tanda_tangan' => $signature
     ]);
 
-    return redirect()->back()->with('success', 'Successfuly edit!');
+    return redirect()->back()->with('success', 'Data Absensi Anda Berhasil di Input.');
   }
 }

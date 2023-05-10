@@ -17,6 +17,8 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+  <script type="text/javascript" src="js/excanvas.js"></script>
+
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
@@ -27,7 +29,7 @@
     <div class="min-h-screen min-w-full md:flex md:flex-col md:justify-center md:items-center md:px-12 md:py-12 py-5">
 
       <!-- Time Card Mobile -->
-      <div class="md:hidden px-10 w-full md:max-w-sm pb-5">
+      <div class="md:hidden px-10 w-full md:max-w-sm py-14">
         <div class="time-content">
           <div id="time-1" class="text-5xl font-thin"></div>
           <div id="date-1"></div>
@@ -56,33 +58,24 @@
           <div class="title-form">Form Absensi</div>
           <form action="{{ route('absen.store') }}" method="POST">
             @csrf
-            <!-- Form Tanda Tangan -->
-            <div id="field-1" class="py-10">
-              <label class="label-name">
-                <i class="fa-solid fa-signature"></i>
-                <span>Tanda Tangan</span>
-              </label>
-              <div id="sig"></div>
-              <button id="clear" class="reset-btn">Reset</button>
-              <textarea id="signature64" name="signed" style="display: none"></textarea>
-            </div>
 
             <!-- Form Nama Lengkap -->
-              <div id="field-2" class="py-20 field hidden">
-                <label class="label-name" for="nama">
+              <div id="field-1" class="py-5 field">
+                <label class="label-name">
                   <i class="fa-solid fa-user"></i>
                   <span>Nama Lengkap</span>
                 </label>
-                <input name="nama" class="input-field" type="text" placeholder="John Doe" required>
+                <input name="nama" class="input-field" type="text" placeholder="Masukan Nama Lengkap Anda" required>
               </div>
 
             <!-- Form Skema -->
-            <div id="field-3" class="py-20 field hidden">
-              <label class="label-name" for="skema">
+            <div id="field-2" class="py-5 field hidden">
+              <label class="label-name">
                 <i class="fa-solid fa-building"></i>
                 <span>Skema</span>
               </label>
               <select class="select-option" name="skema" required>
+                <option value="">-Pilih Skema-</option>
                 @foreach ($skema as $skema)
                   @if (old('skema_id') == $skema->id)
                       <option value="{{ $skema->id }}" selected>{{ $skema->skema }}</option>
@@ -94,12 +87,12 @@
             </div>
 
             <!-- Form Status -->
-            <div id="field-4" class="py-20 field hidden">
-              <label class="label-name" for="status-field">
+            <div id="field-3" class="py-5 field hidden">
+              <label class="label-name">
                 <i class="fa-solid fa-bell"></i>
                 <span>Status</span>
               </label>
-              <select id="status-field" name="status" class="select-option" placeholder="JohnDoe@gmail.com" required>
+              <select name="status" class="select-option" placeholder="JohnDoe@gmail.com" required>
                 <option value="">-Pilih Status-</option>
                 <option value="Hadir">Hadir</option>
                 <option value="Izin">Izin</option>
@@ -108,12 +101,12 @@
             </div>
 
             <!-- Form Keterangan -->
-            <div id="field-5" class="py-20 field hidden">
-              <label class="label-name" for="keterangan">
+            <div id="field-4" class="py-5 field hidden">
+              <label class="label-name">
                 <i class="fa-solid fa-pen"></i>
                 <span>Keterangan</span>
               </label>
-              <select id="keterangan" name="keterangan" class="select-option" required>
+              <select name="keterangan" class="select-option" required>
                 <option value="">-Pilih Keterangan-</option>
                 <option value="Administrasi Umum dan Keuangan">Administrasi Umum dan Keuangan</option>
                 <option value="Mutu">Mutu</option>
@@ -121,6 +114,17 @@
                 <option value="Sertifikasi">Sertifikasi</option>
                 <option value="Lainya">Lainya</option>
               </select>
+            </div>
+
+            <!-- Form Tanda Tangan -->
+            <div id="field-5" class="py-5 field hidden">
+              <label class="label-name">
+                <i class="fa-solid fa-signature"></i>
+                <span>Tanda Tangan</span>
+              </label>
+              <div id="sig"></div>
+              <button id="clear" class="reset-btn">Reset</button>
+              <textarea id="signature64" name="signed" style="display: none"></textarea>
             </div>
 
             <!-- Form Button -->
@@ -139,13 +143,17 @@
       </div>
     </div>
   </div>
+  @include('sweetalert::alert')
 <!-- END VIEW -->
 
   <script type="text/javascript">
     //Function Signature
     var sig = $('#sig').signature({
       syncField: '#signature64',
-      syncFormat: 'PNG'});
+      syncFormat: 'PNG',
+      guideline: true,
+      scale: 1,
+      distance: 0});
     $('#clear').click(function(e) {
         e.preventDefault();
         sig.signature('clear');
