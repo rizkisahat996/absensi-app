@@ -132,7 +132,7 @@
                         <span>Tanda Tangan</span>
                       </label>
                       <div id="sig"></div>
-                      <div class="grid grid-cols-2 pt-4">
+                      <div class="grid grid-cols-2 pt-2">
                         <div class="col-span-1 flex justify-start items-center">
                           <button id="clear" class="reset-btn">Reset</button>
                         </div>
@@ -146,7 +146,7 @@
               </div>
             </form>
               <!-- Slider indicators -->
-              <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+              <div class="absolute z-30 flex space-x-3 -translate-x-1/2 left-1/2">
                   <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
                   <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
                   <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
