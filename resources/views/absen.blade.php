@@ -57,7 +57,6 @@
 
         <div class="card-form col-span-full md:col-span-1">
           <div class="title-form">Form Absensi</div>
-
           <div id="indicators-carousel" class="relative w-full" data-carousel="static">
               <!-- Carousel wrapper -->
               <div class="relative h-60 overflow-hidden rounded-lg md:h-96">
