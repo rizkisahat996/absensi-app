@@ -14,6 +14,7 @@
   <!-- Scripts -->
   <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
   <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
@@ -26,10 +27,155 @@
 <body class="bg-main">
 <!-- START VIEW -->
   <div id="desktop-view" class="bg-image" style="background-image: url('{{ asset('/image/bg-2.png') }}')">
-    <div class="min-h-screen min-w-full md:flex md:flex-col md:justify-center md:items-center md:px-12 md:py-12 py-5">
 
+    <div class="main-content">
       <!-- Time Card Mobile -->
       <div class="md:hidden px-10 w-full md:max-w-sm py-14">
+        <div class="time-content">
+          <div id="time-1" class="text-5xl font-thin"></div>
+          <div id="date-1"></div>
+        </div>
+      </div>
+
+      <!-- Time Card & Welcome Desktop -->
+      <div class="grid grid-cols-2 card-content">
+        <div class="hidden md:grid col-span-1 card-welcome">
+          <div class="w-full md:max-w-sm pb-10">
+            <div class="time-content">
+              <div id="time-2" class="text-5xl font-thin"></div>
+              <div id="date-2"></div>
+            </div>
+          </div>
+          <div class="flex justify-center items-center mb-6">
+            <img src="{{ asset('image/desktop.png') }}" alt="">
+          </div>
+          <div class="text-white">
+            <div class="text-2xl">Welcome To Absensi App</div>
+            <div class="">Silahkan masukan data diri dan tanda tangan untuk mengisi absen...</div>
+          </div>
+        </div>
+
+        <div class="card-form col-span-full md:col-span-1">
+          <div class="title-form">Form Absensi</div>
+
+          <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+              <!-- Carousel wrapper -->
+              <div class="relative h-60 overflow-hidden rounded-lg md:h-96">
+                <!-- Item 1 -->
+                <form action="{{ route('absen.store') }}" method="POST">
+                      @csrf
+                  <div class="hidden pt-10 md:pt-20 duration-700 ease-in-out" data-carousel-item="active">
+                    <div class="px-16">
+                      <label class="label-name">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Nama Lengkap</span>
+                      </label>
+                      <input name="nama" class="input-field" type="text" placeholder="Masukan Nama Lengkap Anda" required>
+                    </div>
+                  </div>
+                  <!-- Item 2 -->
+                  <div class="hidden pt-10 md:pt-20 duration-700 ease-in-out" data-carousel-item>
+                    <div class="px-16 field">
+                        <label class="label-name">
+                          <i class="fa-solid fa-building"></i>
+                          <span>Skema</span>
+                        </label>
+                        <select class="select-option" name="skema" required>
+                          <option value="">-Pilih Skema-</option>
+                          @foreach ($skema as $skema)
+                            @if (old('skema_id') == $skema->id)
+                                <option value="{{ $skema->id }}" selected>{{ $skema->skema }}</option>
+                            @else
+                                <option value="{{ $skema->id }}">{{ $skema->skema }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                      </div>
+                  </div>
+                  <!-- Item 3 -->
+                  <div class="hidden pt-10 md:pt-20 duration-700 ease-in-out" data-carousel-item>
+                    <div class="px-16">
+                        <label class="label-name">
+                          <i class="fa-solid fa-bell"></i>
+                          <span>Status</span>
+                        </label>
+                        <select name="status" class="select-option" placeholder="JohnDoe@gmail.com" required>
+                          <option value="">-Pilih Status-</option>
+                          <option value="Hadir">Hadir</option>
+                          <option value="Izin">Izin</option>
+                          <option value="Sakit">Sakit</option>
+                        </select>
+                      </div>
+                  </div>
+                  <!-- Item 4 -->
+                  <div class="hidden pt-10 md:pt-20 duration-700 ease-in-out" data-carousel-item>
+                    <div class="px-16">
+                      <label class="label-name">
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Keterangan</span>
+                      </label>
+                      <select name="keterangan" class="select-option" required>
+                        <option value="">-Pilih Keterangan-</option>
+                        <option value="Administrasi Umum dan Keuangan">Administrasi Umum dan Keuangan</option>
+                        <option value="Mutu">Mutu</option>
+                        <option value="Sistem">Sistem</option>
+                        <option value="Sertifikasi">Sertifikasi</option>
+                        <option value="Lainya">Lainya</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- Item 5 -->
+                  <div class="duration-700 md:pt-20 ease-in-out" data-carousel-item>
+                    <div class="px-16 field">
+                      <label class="label-name">
+                        <i class="fa-solid fa-signature"></i>
+                        <span>Tanda Tangan</span>
+                      </label>
+                      <div id="sig"></div>
+                      <div class="grid grid-cols-2 pt-4">
+                        <div class="col-span-1 flex justify-start items-center">
+                          <button id="clear" class="reset-btn">Reset</button>
+                        </div>
+                        <div class="col-span-1 flex justify-end items-center">
+                          <button id="submit-btn" class="submit-btn" type="submit">Submit</button>
+                        </div>
+                      </div>
+                      <textarea id="signature64" name="signed" style="display: none"></textarea>
+                    </div>
+                  </div>
+              </div>
+            </form>
+              <!-- Slider indicators -->
+              <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+                  <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                  <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                  <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                  <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                  <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+              </div>
+              <!-- Slider controls -->
+              <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                  <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                      <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                      <span class="sr-only">Previous</span>
+                  </span>
+              </button>
+              <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                  <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                      <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                      <span class="sr-only">Next</span>
+                  </span>
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{-- <div class="main-content">
+
+
+      <!-- Time Card Mobile -->
+      <div class="md:hidden px-16 w-full md:max-w-sm py-14">
         <div class="time-content">
           <div id="time-1" class="text-5xl font-thin"></div>
           <div id="date-1"></div>
@@ -137,102 +283,16 @@
                 <button id="submit-btn" class="submit-btn hidden" type="submit">Submit</button>
               </div>
             </div>
-
           </form>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
   @include('sweetalert::alert')
+
 <!-- END VIEW -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+  <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
 
-  <script type="text/javascript">
-    //Function Signature
-    var sig = $('#sig').signature({
-      syncField: '#signature64',
-      syncFormat: 'PNG',
-      guideline: true,
-      scale: 1,
-      distance: 0});
-    $('#clear').click(function(e) {
-        e.preventDefault();
-        sig.signature('clear');
-        $("#signature64").val('');
-    });
-
-    //Function Prev & Next Button
-    let currentField = 1;
-    const fieldCount = 5;
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-
-    function showField(fieldNum) {
-        const prevField = document.getElementById('field-' + currentField);
-        const nextField = document.getElementById('field-' + fieldNum);
-
-        prevField.classList.add('hidden');
-        nextField.classList.remove('hidden');
-        currentField = fieldNum;
-
-        if (currentField === 1) {
-            prevBtn.classList.add('hidden');
-        } else {
-            prevBtn.classList.remove('hidden');
-        }
-
-        if (currentField === fieldCount) {
-            nextBtn.classList.add('hidden');
-            document.getElementById('submit-btn').classList.remove('hidden');
-        } else {
-            nextBtn.classList.remove('hidden');
-            document.getElementById('submit-btn').classList.add('hidden');
-        }
-    }
-
-    prevBtn.addEventListener('click', function() {
-        showField(currentField - 1);
-    });
-
-    nextBtn.addEventListener('click', function() {
-        showField(currentField + 1);
-    });
-
-      //Function Time
-      function displayTime() {
-      var date = new Date();
-      var hours = date.getHours();
-      var minutes = date.getMinutes();
-      var seconds = date.getSeconds();
-
-      hours = (hours < 10 ? "0" : "") + hours;
-      minutes = (minutes < 10 ? "0" : "") + minutes;
-      seconds = (seconds < 10 ? "0" : "") + seconds;
-
-      var time = hours + ":" + minutes + ":" + seconds;
-
-      document.getElementById("time-1").innerHTML = time;
-      document.getElementById("time-2").innerHTML = time;
-    }
-
-    setInterval(displayTime, 1000);
-
-    //Function Date
-    function getCurrentDateTime() {
-      const months = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
-      const currentdate = new Date();
-      const datetime = currentdate.getDate() + " "
-                    + months[currentdate.getMonth()] + " "
-                    + currentdate.getFullYear()
-      return datetime;
-    }
-
-    setInterval(function() {
-      var currentTime = getCurrentDateTime();
-      document.getElementById("date-1").innerHTML = currentTime;
-      document.getElementById("date-2").innerHTML = currentTime;
-    }, 1000);
-
-  </script>
 </body>
 </html>
