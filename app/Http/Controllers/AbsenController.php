@@ -22,7 +22,7 @@ class AbsenController extends Controller
     $absen_id = DB::table('tb_absen')->orderBy('id', 'desc')->first()->id + 1;
 
     // Signature
-    $folderUrl = URL::to('/upload');
+    $folderUrl = URL::to('/storage/upload');
     $image_parts = explode(";base64,", $request->signed);
     if (count($image_parts) < 2) {
       return back()->with('error', 'Invalid signature format');
