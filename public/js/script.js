@@ -1,5 +1,5 @@
  //Function Signature
-let sig = $('#sig').signature({
+        let sig = $('#sig').signature({
           syncField: '#signature64',
           syncFormat: 'PNG',
           guideline: true,
@@ -11,42 +11,6 @@ let sig = $('#sig').signature({
             sig.signature('clear');
             $("#signature64").val('');
         });
-//     //Function Prev & Next Button
-//     let currentField = 1;
-//     const fieldCount = 5;
-//     const prevBtn = document.getElementById('prev-btn');
-//     const nextBtn = document.getElementById('next-btn');
-
-//     function showField(fieldNum) {
-//       const prevField = document.getElementById('field-' + currentField);
-//       const nextField = document.getElementById('field-' + fieldNum);
-
-//         prevField.classList.add('hidden');
-//         nextField.classList.remove('hidden');
-//         currentField = fieldNum;
-
-//         if (currentField === 1) {
-//             prevBtn.classList.add('hidden');
-//         } else {
-//             prevBtn.classList.remove('hidden');
-//         }
-
-//         if (currentField === fieldCount) {
-//             nextBtn.classList.add('hidden');
-//             document.getElementById('submit-btn').classList.remove('hidden');
-//         } else {
-//             nextBtn.classList.remove('hidden');
-//             document.getElementById('submit-btn').classList.add('hidden');
-//         }
-//     }
-
-//     prevBtn.addEventListener('click', function() {
-//         showField(currentField - 1);
-//     });
-
-//     nextBtn.addEventListener('click', function() {
-//         showField(currentField + 1);
-//     });
 
       //Function Time
       function displayTime() {

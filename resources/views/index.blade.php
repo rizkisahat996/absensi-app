@@ -18,7 +18,6 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
-  <script type="text/javascript" src="js/excanvas.js"></script>
 
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -169,123 +168,6 @@
         </div>
       </div>
     </div>
-
-    {{-- <div class="main-content">
-
-
-      <!-- Time Card Mobile -->
-      <div class="md:hidden px-16 w-full md:max-w-sm py-14">
-        <div class="time-content">
-          <div id="time-1" class="text-5xl font-thin"></div>
-          <div id="date-1"></div>
-        </div>
-      </div>
-
-      <!-- Time Card & Welcome Desktop -->
-      <div class="grid grid-cols-2 card-content">
-        <div class="hidden md:grid col-span-1 card-welcome">
-          <div class="w-full md:max-w-sm pb-10">
-            <div class="time-content">
-              <div id="time-2" class="text-5xl font-thin"></div>
-              <div id="date-2"></div>
-            </div>
-          </div>
-          <div class="flex justify-center items-center mb-6">
-            <img src="{{ asset('image/desktop.png') }}" alt="">
-          </div>
-          <div class="text-white">
-            <div class="text-2xl">Welcome To Absensi App</div>
-            <div class="">Silahkan masukan data diri dan tanda tangan untuk mengisi absen...</div>
-          </div>
-        </div>
-
-        <div class="card-form col-span-full md:col-span-1">
-          <div class="title-form">Form Absensi</div>
-          <form action="{{ route('absen.store') }}" method="POST">
-            @csrf
-
-            <!-- Form Nama Lengkap -->
-              <div id="field-1" class="py-5 field">
-                <label class="label-name">
-                  <i class="fa-solid fa-user"></i>
-                  <span>Nama Lengkap</span>
-                </label>
-                <input name="nama" class="input-field" type="text" placeholder="Masukan Nama Lengkap Anda" required>
-              </div>
-
-            <!-- Form Skema -->
-            <div id="field-2" class="py-5 field hidden">
-              <label class="label-name">
-                <i class="fa-solid fa-building"></i>
-                <span>Skema</span>
-              </label>
-              <select class="select-option" name="skema" required>
-                <option value="">-Pilih Skema-</option>
-                @foreach ($skema as $skema)
-                  @if (old('skema_id') == $skema->id)
-                      <option value="{{ $skema->id }}" selected>{{ $skema->skema }}</option>
-                  @else
-                      <option value="{{ $skema->id }}">{{ $skema->skema }}</option>
-                  @endif
-                @endforeach
-              </select>
-            </div>
-
-            <!-- Form Status -->
-            <div id="field-3" class="py-5 field hidden">
-              <label class="label-name">
-                <i class="fa-solid fa-bell"></i>
-                <span>Status</span>
-              </label>
-              <select name="status" class="select-option" placeholder="JohnDoe@gmail.com" required>
-                <option value="">-Pilih Status-</option>
-                <option value="Hadir">Hadir</option>
-                <option value="Izin">Izin</option>
-                <option value="Sakit">Sakit</option>
-              </select>
-            </div>
-
-            <!-- Form Keterangan -->
-            <div id="field-4" class="py-5 field hidden">
-              <label class="label-name">
-                <i class="fa-solid fa-pen"></i>
-                <span>Keterangan</span>
-              </label>
-              <select name="keterangan" class="select-option" required>
-                <option value="">-Pilih Keterangan-</option>
-                <option value="Administrasi Umum dan Keuangan">Administrasi Umum dan Keuangan</option>
-                <option value="Mutu">Mutu</option>
-                <option value="Sistem">Sistem</option>
-                <option value="Sertifikasi">Sertifikasi</option>
-                <option value="Lainya">Lainya</option>
-              </select>
-            </div>
-
-            <!-- Form Tanda Tangan -->
-            <div id="field-5" class="py-5 field hidden">
-              <label class="label-name">
-                <i class="fa-solid fa-signature"></i>
-                <span>Tanda Tangan</span>
-              </label>
-              <div id="sig"></div>
-              <button id="clear" class="reset-btn">Reset</button>
-              <textarea id="signature64" name="signed" style="display: none"></textarea>
-            </div>
-
-            <!-- Form Button -->
-            <div class="grid grid-cols-2">
-              <div class="col-span-1 flex justify-start items-center">
-                <button id="prev-btn" class="submit-btn hidden" type="button">Previous</button>
-              </div>
-              <div class="col-span-1 flex justify-end items-center">
-                <button id="next-btn" class="submit-btn" type="button">Next</button>
-                <button id="submit-btn" class="submit-btn hidden" type="submit">Submit</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div> --}}
   </div>
   @include('sweetalert::alert')
 

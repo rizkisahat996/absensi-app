@@ -14,7 +14,7 @@ class AbsenController extends Controller
   public function index()
   {
     $skema = DB::table('tb_skema')->get();
-    return view('absen', compact('skema'));
+    return view('index', compact('skema'));
   }
 
   public function store(Request $request)
