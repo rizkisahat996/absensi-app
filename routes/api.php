@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Signature;
+
+use function PHPUnit\Framework\returnValue;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/signature', function () {
+  $tb_signature = signature::all();
+  return response()->json($tb_signature);
 });
