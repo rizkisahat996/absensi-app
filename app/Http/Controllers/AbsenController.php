@@ -34,13 +34,6 @@ class AbsenController extends Controller
 
     Storage::disk('public')->put('upload/' . $signature, $image_base64);
 
-    // $request->validate([
-    //   'nama' => 'required',
-    //   'skema_absen' => 'required',
-    //   'status' => 'required',
-    //   'keterangan' => 'required',
-    //   'tanda_tangan' => 'required',
-    // ]);
     DB::table('tb_absen')->insert([
       'nama' => $request->nama,
       'tanggal' => Carbon::now(),
